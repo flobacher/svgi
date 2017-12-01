@@ -1,0 +1,13 @@
+#dirs
+.idea
+.DS_Store
+
+tests
+examples
+src
+
+
+#files
+.editorconfig
+.prettierrc
+npm-debug.log

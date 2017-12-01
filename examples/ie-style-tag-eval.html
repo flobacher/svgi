@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVGInjector Test: IE Style Tag Use</title>
+    <style>
+      body { background-color: red; color: white; font-family: sans-serif; margin: 25px;}
+      a { color: white; }
+      .pass { display: none; }
+    </style>
+  </head>
+  <body>
+
+    <p>IE doesn't evaluate and use style tags on injected SVGs.</p>
+    <p>This page tests if the SVGInjector workaround for this issue is effective.</p>
+    <p><a href="https://github.com/iconic/SVGInjector/issues/23">Reference</a></p>
+
+    <svg id="style-test-svg" data-src="style-tag-test.svg" />
+
+    <script src="../dist/svg-injector.min.js"></script>
+    <script>
+
+      new SVGInjector().inject(document.querySelectorAll('svg[data-src]'));
+
+    </script>
+  </body>
+</html>

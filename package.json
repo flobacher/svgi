@@ -1,0 +1,50 @@
+{
+  "name": "svginjector",
+  "description": "forked version of iconic/SVGInjector, extended by the ability to use spritesheets and support for angularjs",
+  "version": "3.0.0",
+  "author": "",
+  "contributors": [
+    {
+      "name": "Iconic",
+      "email": "yourfriends@useiconic.com",
+      "url": "https://useiconic.com/"
+    },
+    {
+      "name": "Florian Bacher",
+      "email": "flo@digital-fuse.net"
+    }
+  ],
+  "main": "dist/cjs/index.min.js",
+  "module": "dist/esm/index.min.js",
+  "types": "dist/esm/index.d.ts",
+  "homepage": "https://github.com/flobacher/svginjector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flobacher/svginjector.git"
+  },
+  "keywords": [
+    "SVG",
+    "Scalable Vector Graphics",
+    "svginjector",
+    "images"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.8.2",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.6.2",
+    "uglify-js": "^3.2.0"
+  },
+  "scripts": {
+    "build:cjs:compile": "tsc --project tsconfig.cjs.json",
+    "build:cjs:minify": "uglifyjs ./dist/cjs/index.js --stats --compress drop_console=true --mangle --comments --output ./dist/cjs/index.min.js",
+    "build:cjs": "npm-run-all build:cjs:*",
+    "build:esm": "tsc",
+    "build": "npm-run-all clean build:*",
+    "clean": "rimraf dist",
+    "start": "tsc --watch",
+    "format": "prettier --write \"./*.js\" \"src/**/*.ts\""
+  },
+  "dependencies": {}
+}

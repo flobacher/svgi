@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="svginjectordemo">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SVGInjector Example: SVG Sprites</title>
+    <style>
+      body {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Spritesheet Classbased with AngularJS</h1>
+
+    <!-- inline svg -> leave me alone -->
+    <svg width="8" height="8" viewBox="0 0 8 8">
+      <path d="M4.47 0c-.19.02-.37.15-.47.34-.13.26-1.09 2.19-1.28 2.38-.19.19-.44.28-.72.28v4h3.5c.21 0 .39-.13.47-.31 0 0 1.03-2.91 1.03-3.19 0-.28-.22-.5-.5-.5h-1.5c-.28 0-.5-.25-.5-.5s.39-1.58.47-1.84c.08-.26-.05-.54-.31-.63-.07-.02-.12-.04-.19-.03zm-4.47 3v4h1v-4h-1z"/>
+    </svg>
+
+
+    <!-- svg without symbols or views -->
+    <svg data-src="assets/svg/circle.svg" />
+
+    <svg data-src="assets/svg/logo-gradients.svg">
+      <title>Default Tilte replace</title>
+      <desc>Same thing for description</desc>
+    </svg>
+
+    <!-- reference fragments via views - generated with gulp-svg-sprite -->
+    <svg class="sprite--circle">
+      <title>Circle Title Generated (not there in orig)</title>
+      <desc>Circle Desc Generated (not there in orig)</desc>
+    </svg>
+    <svg class="sprite--square" >
+      <title>Square Title Generated (not there in orig, only title generated, desc not set)</title>
+    </svg>
+    <svg class="sprite--square" aria-hidden="true"></svg>
+    <svg class="sprite--triangle" />
+    <svg class="icon sprite--triangle" aria-hidden="true"></svg>
+    <svg class="sprite--logo-gradients">
+      <title>Only Title Overridden</title>
+    </svg>
+
+    <!-- interpolate sprite-class-name -->
+    <svg class="sprite--{{spriteName}}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    <!--<script src="../dist/svg-injector.min.js"></script>-->
+    <script src="../svg-injector.js"></script>
+    <script>
+      (function(window, document, angular){
+
+
+        var injectorOptions = {
+          // forceFallbacks:     true, // -> enable to test png-fallbacks in svg-capable browsers
+          fallbackClassName: ['sprite'], // optional function -> function(element, symbolId) {},
+          // removeStylesClass: 'icon',
+          removeAllStyles: false,
+          spritesheetURL:     'assets/svg/views.svg'
+        };
+
+
+
+        angular.module('svginjectordemo', ['svginjector'])
+          .config(['svgInjectorOptionsProvider', function (svgInjectorOptionsProvider) {
+            svgInjectorOptionsProvider.set(injectorOptions);
+          }])
+          .run(['$rootScope', function ($rootScope) {
+            $rootScope.spriteName = 'circle';
+          }])
+        ;
+
+
+      }(window, document, angular));
+    </script>
+  </body>
+</html>

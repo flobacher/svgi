@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVGInjector Example: All The Things</title>
+    <style>
+      .icon--thumb {
+        width:64px;
+        height:64px;
+        display: block;
+        margin: 100px auto;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Everything</h1>
+    <svg class="icon icon--thumb" data-src="assets/svg/thumb-up.svg" title="I like it!" alt="thumb"></svg>
+
+    <script src="../dist/svg-injector.min.js"></script>
+    <script>
+
+      // For testing in IE8
+      if (!window.console){ console = {log: function() {}}; };
+
+      // Elements to inject
+      var mySVGsToInject = document.querySelectorAll('svg[data-src]');
+
+      // Options
+      var injectorOptions = {
+        evalScripts: 'once',
+
+      };
+
+      // Trigger the injection
+      new SVGInjector(injectorOptions).inject(
+        mySVGsToInject,
+        function (totalSVGsInjected) {
+          // Callback after all SVGs are injected
+          console.log('We injected ' + totalSVGsInjected + ' SVG(s)!');
+        },
+        function (svg) {
+          // Callback after each SVG is injected
+          if (svg) console.log('SVG injected: ' + svg.getAttribute('alt'));
+        }
+      );
+    </script>
+  </body>
+</html>
