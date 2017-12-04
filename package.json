@@ -14,8 +14,9 @@
       "email": "flo@digital-fuse.net"
     }
   ],
-  "main": "dist/cjs/index.min.js",
-  "module": "dist/esm/index.min.js",
+  "browser": "dist/umd/svginjector.min.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "homepage": "https://github.com/flobacher/svginjector",
   "repository": {
@@ -33,16 +34,20 @@
     "npm-run-all": "^4.1.2",
     "prettier": "^1.8.2",
     "rimraf": "^2.6.2",
+    "rollup": "^0.52.0",
     "typescript": "^2.6.2",
     "uglify-js": "^3.2.0"
   },
   "scripts": {
+    "build:umd:compile": "tsc --project tsconfig.umd.json",
+    "build:umd:bundle": "rollup -c",
+    "build:umd:minify": "uglifyjs ./dist/umd/svginjector.js --stats --compress drop_console=true --mangle --comments --output ./dist/umd/svginjector.min.js",
+    "build:umd": "npm-run-all build:umd:*",
     "build:cjs:compile": "tsc --project tsconfig.cjs.json",
-    "build:cjs:minify": "uglifyjs ./dist/cjs/index.js --stats --compress drop_console=true --mangle --comments --output ./dist/cjs/index.min.js",
     "build:cjs": "npm-run-all build:cjs:*",
     "build:esm": "tsc",
     "build": "npm-run-all clean build:*",
-    "clean": "rimraf dist",
+    "clean": "rimraf .tmp dist",
     "start": "tsc --watch",
     "format": "prettier --write \"./*.js\" \"src/**/*.ts\""
   },

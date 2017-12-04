@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "module": "commonjs",
-    "outDir": "dist/cjs"
+    "module": "es2015",
+    "outDir": ".tmp/umd",
+    "target": "es5"
   }
 }

@@ -16,11 +16,11 @@
     <h1>Simple</h1>
     <svg class="icon icon--thumb inject-me" data-src="assets/svg/thumb-up.svg" title="I like it!" alt="thumb" onclick="console.log('clicked');"/>
 
-    <script src="../dist/cjs/index.js"></script>
+    <script src="../dist/umd/svginjector___.min.js"></script>
     <script>
 
       // Do the injection
-      new SVGInjector().inject(document.querySelectorAll('.inject-me'));
+      new svgi.SVGInjector().inject(document.querySelectorAll('.inject-me'));
     </script>
 
   </body>
